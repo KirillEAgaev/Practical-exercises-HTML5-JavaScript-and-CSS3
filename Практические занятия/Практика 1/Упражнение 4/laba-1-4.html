@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - Exercise 4</title>
+    <script>
+        (function () {
+            "use strict"
+            // Определение класса NewClass
+            class NewClass {
+                constructor(title, url) {
+                    this.title = title; // Свойство title
+                    this.url = url;     // Свойство url
+                }
+
+                // Метод show для вывода информации
+                show() {
+                    document.write("Заголовок: " + this.title + "<br>");
+                    document.write("URL: " + this.url + "<br>");
+                }
+            }
+
+            // Функция для демонстрации работы класса
+            function demonstrateClass() {
+                // Создание объекта класса NewClass
+                const myObject = new NewClass("Пример класса", "https://example.com");
+                // Вызов метода show
+                myObject.show();
+            }
+        }());
+    </script>
+</head>
+<body onload="demonstrateClass()">
+<h1>Лабораторная работа 1 - Упражнение 4</h1>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление CSS из JavaScript</title>
+    <style>
+        #change {
+            font-size: 16px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторная работа 2 - Упражнение 2</h1>
+
+<p id="change">Этот текст будет изменен.</p>
+<a href="#" id="changeStyleLink">Наведи курсор на меня, чтобы изменить стиль текста</a>
+
+<script>
+    (function () {
+        "use strict"
+        function ChangeStyle() {
+            const element = document.getElementById("change");
+            element.style.color = "red";           // Изменение цвета текста
+            element.style.fontSize = "24px";       // Изменение размера текста
+            element.style.fontWeight = "bold";     // Установка полужирного начертания текста
+            element.style.textDecoration = "underline"; // Подчеркивание текста
+        }
+
+        // Добавляем обработчик события на наведение курсора
+        const link = document.getElementById("changeStyleLink");
+        link.addEventListener("mouseover", ChangeStyle);
+    }());
+</script>
+
+</body>
+</html>

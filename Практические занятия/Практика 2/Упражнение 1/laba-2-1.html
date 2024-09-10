@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2 - Exercise 1</title>
+    <style>
+        img {
+            transition: transform 0.2s ease; /* Плавный переход при изменении размера */
+        }
+    </style>
+</head>
+<body>
+<h1>Лабораторная работа 2 - Упражнение 1</h1>
+
+<!-- Объект изображения -->
+<img id="myImage" src="apple.jpg" alt="Яблоко" style="width: 200px; cursor: pointer;">
+
+<script>
+    (function () {
+        "use strict"
+        // Находим изображение по его ID
+        const img = document.getElementById("myImage");
+
+        // Флаг для отслеживания состояния увеличения
+        var isEnlarged = false;
+
+        // Функция обработки клика на изображение
+        img.addEventListener("click", function() {
+            if (isEnlarged) {
+                // Уменьшение размера
+                img.style.transform = "scale(1)";
+            } else {
+                // Увеличение размера
+                img.style.transform = "scale(2)";
+            }
+            // Меняем состояние флага
+            isEnlarged = !isEnlarged;
+        });
+    }());
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.menu-container {
+    width: 500px;
+    background-color: #d9c59d;
+    padding: 20px;
+    border: 1px solid #b89a6b;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+p {
+    tfont-size: 32px; /* Увеличиваем размер шрифта для большей заметности */
+    color: #333; /* Устанавливаем более тёмный цвет текста */
+    text-align: center; /* Выравниваем текст влево */
+    margin-left: -300px;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    border-bottom: 1px solid #b89a6b;
+}
+
+.menu li:last-child {
+    border-bottom: none; /* Убираем нижнюю границу у последнего элемента */
+}
+
+.menu li:hover {
+    background-color: #e3d0b9; /* Изменение фона при наведении */
+    cursor: pointer;
+}

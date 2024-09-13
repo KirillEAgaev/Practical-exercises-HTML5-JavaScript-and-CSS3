@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Телефонная записная книжка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Телефонная записная книжка</h1>
+
+<label for="name">Имя:</label>
+<input type="text" id="name" placeholder="Введите имя">
+<br>
+<label for="phone">Телефон:</label>
+<input type="text" id="phone" placeholder="Введите телефон">
+<br>
+<button id="addButton">Добавить</button>
+
+<h2>Записи</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody id="contactList"></tbody>
+</table>
+
+<script src="laba-5-3.js"></script>
+
+</body>
+</html>

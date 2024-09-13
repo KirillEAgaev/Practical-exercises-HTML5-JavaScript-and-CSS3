@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма</title>
+    <style>
+        .required:invalid {
+            border-color: red;
+        }
+        .required:valid {
+            border-color: green;
+        }
+        .input-image {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Форма</h1>
+<p>Пожалуйста, заполните обязательные поля.</p>
+<form id="myForm">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" class="required" required>
+    <img id="nameImage" class="input-image" src="no.jpeg" alt="status"><br><br>
+
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" required>
+    <img id="ageImage" class="input-image" src="no.jpeg" alt="status"><br><br>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" class="required" required>
+    <img id="emailImage" class="input-image" src="no.jpeg" alt="status"><br><br>
+
+    <label for="website">Сайт:</label>
+    <input type="url" id="website">
+    <img id="websiteImage" class="input-image" src="no.jpeg" alt="status"><br><br>
+
+    <button type="submit">Отправить</button>
+</form>
+
+<script>
+    (function () {
+        "use strict"
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('input', function() {
+            // Имя
+            const nameInput = document.getElementById('name');
+            const nameImage = document.getElementById('nameImage');
+            nameImage.src = nameInput.validity.valid ? 'yes.jpeg' : 'no.jpeg';
+
+            // Возраст
+            const ageInput = document.getElementById('age');
+            const ageImage = document.getElementById('ageImage');
+            ageImage.src = ageInput.validity.valid ? 'yes.jpeg' : 'no.jpeg';
+
+            // E-mail
+            const emailInput = document.getElementById('email');
+            const emailImage = document.getElementById('emailImage');
+            emailImage.src = emailInput.validity.valid ? 'yes.jpeg' : 'no.jpeg';
+
+            // Сайт
+            const websiteInput = document.getElementById('website');
+            const websiteImage = document.getElementById('websiteImage');
+            websiteImage.src = websiteInput.validity.valid ? 'yes.jpeg' : 'no.jpeg';
+        });
+    }());
+</script>
+</body>
+</html>

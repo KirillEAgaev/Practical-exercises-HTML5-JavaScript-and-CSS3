@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Градиент на Canvas</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="400"></canvas>
+<script>
+    // Получаем ссылку на элемент canvas
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Создаем линейный градиент
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    // Добавляем цвета в градиент
+    gradient.addColorStop(0, 'magenta'); // начальный цвет
+    gradient.addColorStop(0.5, 'cyan');  // промежуточный цвет
+    gradient.addColorStop(1, 'yellow');  // конечный цвет
+
+    // Закрашиваем фон с помощью градиента
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+</body>
+</html>

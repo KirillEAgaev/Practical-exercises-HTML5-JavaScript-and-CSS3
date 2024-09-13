@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Example</title>
+    <style>
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            border: 2px solid red;
+            padding: 10px;
+        }
+        .box {
+            width: 40%;
+            border: 1px solid black;
+            padding: 10px;
+            min-height: 100px;
+        }
+        .draggable {
+            margin: 5px;
+            padding: 10px;
+            background-color: lightgray;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box" id="box1" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <div class="draggable" id="text1" draggable="true" ondragstart="drag(event)">Text 1</div>
+        <div class="draggable" id="text2" draggable="true" ondragstart="drag(event)">Text 2</div>
+        <div class="draggable" id="text3" draggable="true" ondragstart="drag(event)">Text 3</div>
+    </div>
+    <div class="box" id="box2" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <!-- Пустой блок, куда можно перетаскивать текст -->
+    </div>
+</div>
+
+<script>
+    (function () {
+        "use strict";
+
+        function allowDrop(event) {
+            event.preventDefault(); // Разрешаем перетаскивание
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id); // Сохраняем идентификатор перетаскиваемого элемента
+        }
+
+        function drop(event) {
+            event.preventDefault(); // Отменяем стандартное поведение
+
+            const data = event.dataTransfer.getData("text"); // Получаем идентификатор элемента
+            const draggableElement = document.getElementById(data); // Находим элемент по идентификатору
+
+            // Делаем drop на элемент с классом "box"
+            if (event.target.classList.contains('box')) {
+                event.target.appendChild(draggableElement); // Добавляем элемент в целевой блок
+            } else {
+                event.target.closest('.box').appendChild(draggableElement); // Если не на box, добавляем в родительский box
+            }
+        }
+
+        // Привязываем события dragover и drop к элементам
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.addEventListener('dragover', allowDrop);
+            box.addEventListener('drop', drop);
+        });
+
+        // Привязываем событие dragstart к элементам, у которых есть класс "draggable"
+        const draggableItems = document.querySelectorAll('.draggable');
+        draggableItems.forEach(item => {
+            item.addEventListener('dragstart', drag);
+        });
+
+    }());
+</script>
+
+</body>
+</html>

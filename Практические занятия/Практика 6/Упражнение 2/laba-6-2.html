@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамические URL с History API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        a {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Динамические URL</h1>
+<p>Нажмите на одну из ссылок, чтобы изменить URL без перезагрузки страницы:</p>
+
+<a href="#" id="link1">Ссылка 1</a>
+<a href="#" id="link2">Ссылка 2</a>
+<a href="#" id="link3">Ссылка 3</a>
+<a href="#" id="link4">Ссылка 4</a>
+<a href="#" id="link5">Ссылка 5</a>
+
+<script>
+    (function () {
+        "use strict"
+        // Получаем текущее значение URL
+        const currentUrl = `${location.protocol}//${location.hostname}:${location.port}/`;
+
+        // Функция для обновления истории
+        function updateHistory(linkNumber) {
+            // Создаем новый URL
+            const newUrl = `${currentUrl}page${linkNumber}`;
+
+            // Используем pushState для добавления нового URL в историю
+            history.pushState({ page: linkNumber }, `Страница ${linkNumber}`, newUrl);
+
+            // Обновляем содержимое страницы
+            document.body.style.backgroundColor = linkNumber % 2 === 0 ? 'lightblue' : 'lightgreen';
+            document.querySelector('h1').innerText = `Вы находитесь на странице ${linkNumber}`;
+        }
+
+        // Добавляем обработчики событий для ссылок
+        document.getElementById('link1').addEventListener('click', function(event) {
+            event.preventDefault();
+            updateHistory(1);
+        });
+        document.getElementById('link2').addEventListener('click', function(event) {
+            event.preventDefault();
+            updateHistory(2);
+        });
+        document.getElementById('link3').addEventListener('click', function(event) {
+            event.preventDefault();
+            updateHistory(3);
+        });
+        document.getElementById('link4').addEventListener('click', function(event) {
+            event.preventDefault();
+            updateHistory(4);
+        });
+        document.getElementById('link5').addEventListener('click', function(event) {
+            event.preventDefault();
+            updateHistory(5);
+        });
+
+        // Обработка навигации с помощью кнопок "Назад" и "Вперед"
+        window.onpopstate = function(event) {
+            const pageNumber = event.state ? event.state.page : 0;
+            document.querySelector('h1').innerText = `Вы находитесь на странице ${pageNumber}`;
+            document.body.style.backgroundColor = pageNumber % 2 === 0 ? 'lightblue' : 'lightgreen';
+        };
+    }());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #location {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Пример использования HTML5 Geolocation API</h1>
+<button id="getLocation">Получить текущее местоположение</button>
+<button id="watchLocation">Начать отслеживание местоположения</button>
+<div id="location"></div>
+
+<script>
+    (function () {
+        "use strict"
+        // Функция для обработки данных местоположения
+        function handleLocation(position) {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const locationInfo = `
+                    Широта: ${lat} <br>
+                    Долгота: ${long} <br>
+                    Точность: ${accuracy} метров
+                `;
+            document.getElementById('location').innerHTML = locationInfo;
+        }
+
+        // Функция для обработки ошибок
+        function handleError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById('location').innerHTML = "Ошибка: Позиция отклонена.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById('location').innerHTML = "Ошибка: Данные местоположения недоступны.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById('location').innerHTML = "Ошибка: Время ожидания истекло.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById('location').innerHTML = "Ошибка: Произошла неизвестная ошибка.";
+                    break;
+            }
+        }
+
+        // Проверяем поддержку Geolocation API
+        if ("geolocation" in navigator) {
+            document.getElementById('getLocation').onclick = function() {
+                navigator.geolocation.getCurrentPosition(handleLocation, handleError);
+            };
+
+            document.getElementById('watchLocation').onclick = function() {
+                navigator.geolocation.watchPosition(handleLocation, handleError);
+            };
+        } else {
+            document.getElementById('location').innerHTML = "Геолокация не поддерживается вашим браузером.";
+        }
+    }());
+</script>
+</body>
+</html>

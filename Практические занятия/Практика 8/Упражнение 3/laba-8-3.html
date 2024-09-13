@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример jQuery</title>
+    <style>
+        #block_1 {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        #block_2 {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid blue;
+            transition: opacity 3s;
+        }
+        #block_3 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            margin: 20px;
+            transition: height 0.5s;
+        }
+        #red-square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<button id="button_1">Скрыть блок 1</button>
+<button id="button_2">Показать блок 1</button>
+<button id="button_3">Уменьшить высоту блока 3</button>
+<button id="button_4">Восстановить высоту блока 3</button>
+<button id="button_5">Анимация квадрата</button>
+
+<p id="block_1">Это блок 1. Нажмите кнопку для его скрытия.</p>
+<p id="block_2">Это блок 2. Наведите на меня курсор.</p>
+<div id="block_3">Это блок 3.</div>
+
+<div id="red-square"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    (function () {
+        "use strict"
+        $(document).ready(function () {
+            // Скрытие и отображение блока 1
+            $("#button_1").click(function () {
+                $("#block_1").fadeOut();
+            });
+
+            $("#button_2").click(function () {
+                $("#block_1").fadeIn();
+            });
+
+            // Прозрачность блока 2
+            $("#block_2").hover(
+                function () {
+                    $(this).css("opacity", "0.5");
+                },
+                function () {
+                    $(this).css("opacity", "1");
+                }
+            );
+
+            // Изменение высоты блока 3
+            $("#button_3").click(function () {
+                $("#block_3").animate({ height: "0" }, 5000);
+            });
+
+            $("#button_4").click(function () {
+                $("#block_3").animate({ height: "100px" }, 7000); // Стандартная высота
+            });
+
+            // Анимация квадрата
+            $("#button_5").click(function () {
+                $("#red-square").animate({ top: 0, left: 0 }, 1000)
+                    .animate({ top: 0, left: $(window).width() - 50 }, 1000)
+                    .animate({ top: $(window).height() - 50, left: $(window).width() - 50 }, 1000)
+                    .animate({ top: $(window).height() - 50, left: 0 }, 1000)
+                    .animate({ top: 0, left: 0 }, 1000);
+            });
+        });
+    }());
+</script>
+</body>
+</html>

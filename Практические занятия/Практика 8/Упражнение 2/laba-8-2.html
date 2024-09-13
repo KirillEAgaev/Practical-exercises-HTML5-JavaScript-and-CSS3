@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Exercise 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Одинарное нажатие на кнопку с id='button_1'
+            $('#button_1').on('click', function() {
+                $('#block_1').css({
+                    'color': 'green',
+                    'font-size': '24px'
+                });
+            });
+
+            // Наведение на ссылку
+            $('a').hover(
+                function() {
+                    $(this).css('color', 'orange'); // При наведении
+                },
+                function() {
+                    $(this).css('color', ''); // При уходе курсора возвращаем цвет по умолчанию
+                }
+            );
+
+            // Выделение текста элемента
+            $('#block_1').on('mouseup', function() {
+                if (window.getSelection().toString()) {
+                    $(this).css({
+                        'color': 'red',
+                        'font-size': '18px'
+                    });
+                }
+            });
+
+            // Двойной щелчок по кнопке с id='button_2'
+            $('#button_2').on('dblclick', function() {
+                $('#block_2').css({
+                    'font-family': 'Verdana',
+                    'font-weight': 'bold',
+                    'border': '1px solid black', // Устанавливаем рамку
+                    'padding': '5px' // Добавим немного отступа для рамки
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<button id="button_1">Изменить цвет текста абзаца 1</button>
+<p id="block_1">Это абзац с id="block_1". Наведите на него курсор и выделите текст.</p>
+
+<button id="button_2">Двойной щелчок для изменения блока 2</button>
+<p id="block_2">Это абзац с id="block_2". Попробуйте двойной щелчок.</p>
+
+<a href="#">Это ссылка. Наведите на нее курсор.</a>
+</body>
+</html>

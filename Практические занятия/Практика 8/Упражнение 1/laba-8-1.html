@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Exercise</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Для элемента future внутри fut используем другой цвет */
+        #fut #future {
+            color: blue; /* Замена на любой цвет, отличающийся от красного */
+        }
+    </style>
+    <script>
+        (function () {
+            "use strict"
+            $(document).ready(function() {
+                // Устанавливаем красный цвет и размер шрифта 12pt для элементов
+                $('#meadow').css('color', 'red').css('font-size', '12pt');
+                $('.rainbow').css('color', 'red').css('font-size', '12pt');
+                $('#fut #future').css('color', 'blue').css('font-size', '12pt'); // На всякий случай
+                $('[set]').css('color', 'red').css('font-size', '12pt');
+                $('[last="code"]').css('color', 'red').css('font-size', '12pt');
+            });
+        }());
+    </script>
+</head>
+<body>
+<div id="meadow">Это элемент с id=meadow.</div>
+<div class="rainbow">Это элемент с class=rainbow.</div>
+<div id="fut">
+    <div id="future">Это элемент с id=future внутри fut.</div>
+</div>
+<div set="value">Это элемент с атрибутом set.</div>
+<div last="code">Это элемент с атрибутом last=code.</div>
+</body>
+</html>

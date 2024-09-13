@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Workers Demo</title>
+</head>
+<body>
+<h1>Асинхронная обработка с Web Workers</h1>
+<input type="number" id="num" placeholder="Введите число Фибоначчи" />
+<button id="startBtn">Вычислить</button>
+<div id="result"></div>
+
+<script>
+    // Проверяем, поддерживает ли браузер Web Workers
+    if (typeof(Worker) !== "undefined") {
+        const resultDiv = document.getElementById('result');
+        const startBtn = document.getElementById('startBtn');
+        const numInput = document.getElementById('num');
+        let worker;
+
+        startBtn.addEventListener('click', function() {
+            const num = parseInt(numInput.value);
+            if (isNaN(num) || num < 0) {
+                resultDiv.innerHTML = 'Введите корректное число!';
+                return;
+            }
+
+            // Создаем Web Worker
+            worker = new Worker('worker.js');
+
+            // Отправляем число в Web Worker
+            worker.postMessage(num);
+
+            // Обрабатываем сообщение от Web Worker
+            worker.onmessage = function(event) {
+                resultDiv.innerHTML = 'Фибоначчи числа ' + num + ' = ' + event.data;
+                worker.terminate(); // Завершаем worker после обработки
+            };
+
+            // Обрабатываем ошибки в Web Worker
+            worker.onerror = function(error) {
+                resultDiv.innerHTML = 'Ошибка: ' + error.message;
+                worker.terminate(); // Завершаем worker в случае ошибки
+            };
+
+            resultDiv.innerHTML = 'Вычисление...';
+        });
+    } else {
+        document.getElementById('result').innerHTML = 'Ваш браузер не поддерживает Web Workers.';
+    }
+</script>
+</body>
+</html>

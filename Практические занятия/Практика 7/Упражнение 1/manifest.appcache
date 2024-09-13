@@ -1,0 +1,9 @@
+# Название манифеста: версии/дата
+
+CACHE:
+index.html
+style.css
+app.js
+
+NETWORK:
+*

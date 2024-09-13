@@ -1,0 +1,72 @@
+/* Сброс стандартного отступа для ul и h1 */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Стили для header */
+header {
+    background-color: #0066cc;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Стили для навигации */
+nav ul {
+    display: flex; /* Применение flexbox */
+    justify-content: center;
+    padding: 0;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px; /* Применение border-radius */
+}
+
+/* Эффект при наведении на ссылки */
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s ease; /* Применение transitions */
+}
+
+/* Стили для секции статьи */
+section {
+    display: grid; /* Применение grid */
+    grid-template-columns: repeat(2, 1fr); /* Две колонки */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стили для статьи */
+article {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px; /* Применение border-radius */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Применение box-shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Применение transitions для эффекта */
+}
+
+/* Эффект при наведении на статьи */
+article:hover {
+    transform: translateY(-5px); /* Подъем статьи при наведении */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Увеличение тени при наведении */
+}
+
+/* Стили для footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}

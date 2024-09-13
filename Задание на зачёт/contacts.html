@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="styles/contacts.css">
+    <script>
+        (function () {
+            "use strict";
+
+            // Сообщение для уведомления об успехе или ошибке
+            function showMessage(message, isError = false) {
+                const messageBox = document.getElementById("messageBox");
+                messageBox.textContent = message;
+                messageBox.style.color = isError ? 'red' : 'green';
+                messageBox.style.display = 'block';
+                setTimeout(() => {
+                    messageBox.style.display = 'none';
+                }, 3000); // Убираем сообщение через 3 секунды
+            }
+
+            // Проверка введенных данных
+            function validateEmail(email) {
+                // Регулярное выражение для проверки формата электронной почты
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+            // Сохранение данных в Local Storage
+            function saveData() {
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let date = document.getElementById("date").value;
+                let rating = document.getElementById("range").value;
+                let color = document.getElementById("color").value;
+                let message = document.getElementById("message").value;
+
+                // Проверяем валидность данных
+                if (!name || !email || !message) {
+                    showMessage("Пожалуйста, заполните все обязательные поля.", true);
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    showMessage("Введите корректный адрес электронной почты.", true);
+                    return;
+                }
+
+                // Если все проверки пройдены, сохраняем данные
+                localStorage.setItem('name', name);
+                localStorage.setItem('email', email);
+                localStorage.setItem('date', date);
+                localStorage.setItem('rating', rating);
+                localStorage.setItem('color', color);
+                localStorage.setItem('message', message);
+                showMessage("Данные успешно сохранены!");
+            }
+
+            // Загрузка данных из Local Storage
+            function loadData() {
+                if (localStorage.getItem('name')) {
+                    document.getElementById("name").value = localStorage.getItem('name');
+                }
+                if (localStorage.getItem('email')) {
+                    document.getElementById("email").value = localStorage.getItem('email');
+                }
+                if (localStorage.getItem('date')) {
+                    document.getElementById("date").value = localStorage.getItem('date');
+                }
+                if (localStorage.getItem('rating')) {
+                    document.getElementById("range").value = localStorage.getItem('rating');
+                }
+                if (localStorage.getItem('color')) {
+                    document.getElementById("color").value = localStorage.getItem('color');
+                }
+                if (localStorage.getItem('message')) {
+                    document.getElementById("message").value = localStorage.getItem('message');
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", loadData);
+
+            // Обработка отправки формы
+            window.saveData = saveData; // Экспортируем функцию для глобальной доступности
+
+            // Реализация Drag and Drop для отображения сообщений
+            window.allowDrop = function(event) {
+                event.preventDefault();
+            };
+
+            window.drop = function(event) {
+                event.preventDefault();
+                let data = event.dataTransfer.getData("text");
+                document.getElementById("message").value += '\n' + data; // добавляем перетаскиваемый текст в поле сообщения
+                history.pushState({ message: data }, "Добавлено сообщение", "#message-dropped"); // Добавляем в историю
+            };
+
+            window.drag = function(event) {
+                event.dataTransfer.setData("text", event.target.innerText); // перетаскивание текста
+            };
+
+            // Загружаем данные при загрузке страницы
+            window.onload = loadData;
+
+        }());
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Связаться с нами</h1>
+    <nav>
+        <ul>
+            <li><a href="mainPage.html">Главная</a></li>
+            <li><a href="aboutUs.html">О нас</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="blog.html">Блог</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <article draggable="true" ondragstart="drag(event)" style="cursor: move;">
+        <h2>Перетащите это сообщение</h2>
+        <p>Это сообщение, которое вы можете перетащить в форму.</p>
+    </article>
+
+    <article>
+        <h2>Наш адрес</h2>
+        <p>г. Москва, ул. Примерная, д. 1, оф. 101</p>
+    </article>
+
+    <article>
+        <h2>Телефон</h2>
+        <p>+7 (495) 123-45-67</p>
+    </article>
+
+    <article>
+        <h2>Электронная почта</h2>
+        <p><a href="mailto:info@нашсайт.com">info@нашсайт.com</a></p>
+    </article>
+
+    <article>
+        <h2>Часы работы</h2>
+        <p>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной</p>
+    </article>
+
+    <article>
+        <h2>Форма обратной связи</h2>
+        <form onsubmit="event.preventDefault(); saveData();" action="#">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="date">Выберите дату:</label>
+            <input type="date" id="date" name="date">
+
+            <label for="range">Оцените нашу услугу:</label>
+            <input type="range" id="range" name="rating" min="1" max="5">
+
+            <label for="color">Выберите цвет:</label>
+            <input type="color" id="color" name="color">
+
+            <label for="message">Сообщение:</label>
+            <textarea id="message" name="message" rows="4" required ondrop="drop(event)" ondragover="allowDrop(event)"></textarea>
+
+            <button type="submit">Отправить</button>
+        </form>
+        <div id="messageBox" style="display:none; margin-top: 10px;"></div>
+    </article>
+</section>
+
+</body>
+</html>

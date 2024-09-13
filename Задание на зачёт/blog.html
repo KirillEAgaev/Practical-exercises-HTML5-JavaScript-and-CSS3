@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог</title>
+    <link rel="stylesheet" href="styles/blog.css">
+    <script>
+        (function () {
+            "use strict"
+            let socket;
+
+            function initWebSocket() {
+                socket = new WebSocket('ws://localhost:8080'); // Укажите адрес вашего WebSocket сервера
+
+                socket.onopen = function() {
+                    console.log('Соединение установлено');
+                };
+
+                socket.onmessage = function(event) {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = 'Сообщение от сервера: ' + event.data;
+                    document.getElementById('messages').appendChild(messageElement);
+                };
+
+                socket.onclose = function() {
+                    console.log('Соединение закрыто');
+                };
+
+                socket.onerror = function(error) {
+                    console.error('Ошибка WebSocket: ', error);
+                };
+            }
+
+            function sendMessage() {
+                const message = document.getElementById('messageInput').value;
+                socket.send(message);
+                document.getElementById('messageInput').value = ''; // Очистить поле ввода
+            }
+
+            window.onload = initWebSocket; // Инициализация WebSocket при загрузке страницы
+        }());
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Наш Блог</h1>
+    <nav>
+        <ul>
+            <li><a href="mainPage.html">Главная</a></li>
+            <li><a href="aboutUs.html">О нас</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="blog.html">Блог</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <article>
+        <h2>Как эффективно управлять временем</h2>
+        <p>Управление временем — это основа успешного планирования и достижения целей. В этом посте мы рассмотрим несколько стратегий...</p>
+        <footer>
+            <p>Автор: Иван Иванов | Дата: 15 октября 2023</p>
+        </footer>
+    </article>
+
+    <article>
+        <h2>Топ 10 инструментов для продуктивности</h2>
+        <p>В современном мире существует множество инструментов, которые помогают повысить продуктивность. В этой статье мы расскажем о десяти лучших...</p>
+        <footer>
+            <p>Автор: Анна Петрова | Дата: 10 октября 2023</p>
+        </footer>
+    </article>
+
+    <article>
+        <h2>Советы по ведению блога</h2>
+        <p>Ведение блога может стать отличным способом самовыражения. В этой статье мы делимся советами, которые помогут вам начать свой путь...</p>
+        <footer>
+            <p>Автор: Сергей Сидоров | Дата: 5 октября 2023</p>
+        </footer>
+    </article>
+
+    <article>
+        <h2>Статья о музыке</h2>
+        <p>Слушайте наш любимый трек!</p>
+        <audio controls>
+            <source src="audio.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает элемент audio.
+        </audio>
+    </article>
+
+    <article>
+        <h2>Подкаст о технологиях</h2>
+        <p>Слушайте наш новый подкаст!</p>
+        <audio controls>
+            <source src="audio.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает элемент audio.
+        </audio>
+    </article>
+</section>
+
+<section>
+    <h2>Чат с посетителями</h2>
+    <div id="messages" style="border: 1px solid #ccc; padding: 10px; max-height: 200px; overflow-y: scroll;"></div>
+    <label for="messageInput"></label><input type="text" id="messageInput" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+</section>
+
+<footer>
+    <p>© 2024 Наш сайт. Все права защищены. Подписывайтесь на наши обновления и оставайтесь в курсе свежих постов.</p>
+</footer>
+
+</body>
+</html>

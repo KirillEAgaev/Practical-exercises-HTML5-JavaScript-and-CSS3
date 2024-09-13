@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги</title>
+    <link rel="stylesheet" href="styles/services.css">
+    <script>
+        (function () {
+            "use strict"
+            window.onload = function() {
+                // Получаем элемент canvas
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+
+                // Рисуем круг
+                ctx.beginPath();
+                ctx.arc(150, 75, 50, 0, Math.PI * 2);
+                ctx.fillStyle = "lightblue";
+                ctx.fill();
+                ctx.strokeStyle = "blue";
+                ctx.stroke();
+                ctx.closePath();
+
+                // Рисуем прямоугольник
+                ctx.fillStyle = "orange";
+                ctx.fillRect(200, 50, 100, 100);
+
+                // Рисуем линию
+                ctx.beginPath();
+                ctx.moveTo(50, 150);
+                ctx.lineTo(200, 150);
+                ctx.strokeStyle = "red";
+                ctx.lineWidth = 5;
+                ctx.stroke();
+                ctx.closePath();
+            }
+        }());
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Наши услуги</h1>
+    <nav>
+        <ul>
+            <li><a href="mainPage.html">Главная</a></li>
+            <li><a href="aboutUs.html">О нас</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="blog.html">Блог</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <article>
+        <h2>Описание услуг</h2>
+        <p>Мы предоставляем широкий спектр услуг в области веб-разработки и дизайна.</p>
+    </article>
+
+    <article>
+        <h2>Галерея графики на Canvas</h2>
+        <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
+            Ваш браузер не поддерживает Canvas.
+        </canvas>
+        <p>На этом канвасе вы видите круг, прямоугольник и горизонтальную линию, нарисованные с помощью Canvas API.</p>
+    </article>
+</section>
+
+<footer>
+    <p>© 2024 Наш сайт. Все права защищены. Для дальнейшей информации обращайтесь к нам через указанные контакты.</p>
+</footer>
+
+</body>
+</html>
